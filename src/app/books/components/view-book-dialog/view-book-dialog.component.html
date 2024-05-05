@@ -1,0 +1,31 @@
+<h1 mat-dialog-title> {{ data.title }} </h1>
+<div mat-dialog-content>
+  <div class="flex mt-0">
+    <mat-card class="col-4 mr-2">
+      <mat-card-content>
+        <img [src]="data | bookImage" width="100%" height="auto" mat-card-image />
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="col-8">
+      <mat-card-header>
+        <mat-card-title>Información</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list class="flex flex-column">
+          <mat-list-item> Autor: {{ data.author }} </mat-list-item>
+          <mat-list-item> Género: {{ data.genre }} </mat-list-item>
+          <mat-list-item> Fecha publicación: {{ data.published }} </mat-list-item>
+          <mat-list-item> Editorial: {{ data.publisher }} </mat-list-item>
+          <mat-list-item> ISBN: {{ data.isbn }} </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="mt-3">
+    <h2 title>Sinopsis</h2>
+    <p>{{ data.description }}</p>
+  </div>
+</div>
+<div mat-dialog-actions class="flex justify-content-center flex-wrap">
+  <button mat-flat-button [mat-dialog-close]="false" color="primary" class="align-self-center">Cerrar</button>
+</div>

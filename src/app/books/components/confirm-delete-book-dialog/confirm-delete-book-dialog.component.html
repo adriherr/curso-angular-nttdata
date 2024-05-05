@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>¿Está seguro?</h1>
+<div mat-dialog-content>
+  <p>Este proceso no es reversible, está a punto de eliminar el libro '{{ data.title }}'</p>
+</div>
+<div mat-dialog-actions class="flex justify-content-between mx-2 mb-2">
+  <button mat-button mat-flat-button (click)="onConfirm()" color="warn">
+    Eliminar
+  </button>
+  <button mat-button mat-dialog-close color="primary">
+    Cancelar
+  </button>
+</div>

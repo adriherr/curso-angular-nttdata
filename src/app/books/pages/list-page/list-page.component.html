@@ -1,0 +1,99 @@
+<div class="flex flex-column overflow-auto">
+  <!-- BOOKS FILTERS -->
+  <mat-card class="pr-3">
+    <mat-card-content>
+      <div class="flex flex-column">
+        <div class="col-12">
+          <mat-accordion>
+            <mat-expansion-panel hideToggle>
+              <mat-expansion-panel-header>
+                  Filtros de búsqueda básicos
+              </mat-expansion-panel-header>
+              <div class="flex">
+                <mat-form-field class="w-full">
+                  <input
+                    (keyup)="searchByTitle(searchByTitleInput.value)"
+                    matInput
+                    type="text"
+                    placeholder="Búsqueda por título"
+                    #searchByTitleInput>
+                </mat-form-field>
+              </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel hideToggle>
+              <mat-expansion-panel-header>
+                  Filtros de búsqueda avanzados
+              </mat-expansion-panel-header>
+              <div class="flex">
+                <mat-form-field class="col-3">
+                  <mat-label>Género</mat-label>
+                  <mat-select (selectionChange)="this.selectedGenre = $event.value" #genreInput>
+                    @for (genre of genres; track genre) {
+                      <mat-option [value]="genre">
+                        {{ genre }}
+                      </mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field (click)="picker.open()"  class="col-3">
+                  <mat-label>Rango de fecha</mat-label>
+                  <mat-date-range-input [rangePicker]="picker">
+                    <input matStartDate placeholder="Start date" #dateStart readonly>
+                    <input matEndDate placeholder="End date" #dateEnd readonly (dateChange)="setDates(dateStart.value, dateEnd.value)">
+                  </mat-date-range-input>
+                  <mat-hint>DD/MM/YYYY - DD/MM/YYYY</mat-hint>
+                  <mat-icon matIconSuffix>date_range</mat-icon>
+                  <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+                <div class="col-6 mt-2">
+                  <button
+                    mat-button
+                    mat-flat-button
+                    color="primary"
+                    class="mx-2"
+                    (click)="applyFilters()"
+                  >
+                    <mat-icon>search</mat-icon>
+                    Aplicar Filtros
+                  </button>
+                  <button
+                    mat-button
+                    mat-flat-button
+                    color="accent"
+                    class="mx-2"
+                    (click)="clearFilters(genreInput, dateStart, dateEnd)"
+                  >
+                    <mat-icon>clear</mat-icon>
+                    Limpiar Filtros
+                  </button>
+                </div>
+              </div>
+
+            </mat-expansion-panel>
+          </mat-accordion>
+
+        </div>
+      </div>
+      <div class="flex flex-row-reverse mt-2">
+        <button
+          mat-button
+          mat-flat-button
+          color="primary"
+          (click)="showAddFormDialog()">
+          <mat-icon>add</mat-icon>
+            Agregar Libro
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- BOOKS TABLE -->
+  <shared-table
+    class="mt-4"
+    [dataSource]="books"
+    [columns]="booksTableCols"
+    (onView)="view($event)"
+    (onEdit)="edit($event)"
+    (onDelete)="remove($event)"
+  ></shared-table>
+</div>

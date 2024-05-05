@@ -1,0 +1,28 @@
+
+<mat-table [dataSource]="dataSource" class="mat-elevation-z10 fadein animation-duration-500">
+
+  @for (column of columns; track $index) {
+    <ng-container [matColumnDef]="column.name">
+      <mat-header-cell *matHeaderCellDef> {{ column.label }} </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row[column.name]}} </mat-cell>
+    </ng-container>
+  }
+  <!-- Options Column -->
+  <ng-container [matColumnDef]="optionsCol.name">
+    <mat-header-cell *matHeaderCellDef>{{ optionsCol.label }}</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button (click)="emitRowOnView(row)" mat-icon-button matTooltip="Ver información">
+        <mat-icon>visibility</mat-icon>
+      </button>
+      <button (click)="emitRowOnEdit(row)" mat-icon-button color="accent" matTooltip="Editar">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button (click)="emitRowIdOnDelete(row)" mat-icon-button color="warn" matTooltip="Eliminar">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="namedColumns" class="font-bold "></mat-header-row>
+  <mat-row mat-row *matRowDef="let row; columns: namedColumns;"></mat-row>
+</mat-table>

@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-
+import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'curso-angular-nttdata';
+  constructor() { }
+
+
 }
