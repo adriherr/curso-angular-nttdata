@@ -39,7 +39,6 @@ export class NewEditBookDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data);
     if (this.data) this.addBookForm.reset(this.data);
   }
 
@@ -52,10 +51,6 @@ export class NewEditBookDialogComponent implements OnInit {
 
       return `${year}-${month}-${day}`;
     }
-    console.log({
-      isvalid: this.addBookForm.valid,
-      value: this.addBookForm.value
-    })
     this.currentBook.published = parseDate(this.currentBook.published)
     if (this.addBookForm.valid)
       if (!this.currentBook.id)

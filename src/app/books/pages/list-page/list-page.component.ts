@@ -59,15 +59,12 @@ export class ListPageComponent implements OnInit {
   }
 
   edit(book: Book): void {
-    console.log(book);
-    console.log('editar');
-
     const dialogRef = this.addEditDialog.open(NewEditBookDialogComponent, {
       height: 'auto',
       width: '60%',
       data: book
     });
-  
+
     dialogRef.afterClosed()
       .subscribe(result => {
         if (result) this.fetchBooks();
@@ -80,8 +77,6 @@ export class ListPageComponent implements OnInit {
       data: book
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log({ result });
-      console.log( book.id );
       if (result) this.booksService.removeBook(book.id)
         .subscribe(deletedResult => {
           if (deletedResult) {
@@ -124,9 +119,11 @@ export class ListPageComponent implements OnInit {
     }
     this.booksService.getBooks()
       .subscribe(books => this.books = books.filter(book => {
+          console.log('published:', book.published);
+          console.log('this.dateStart:', this.dateStart);
           const cumpleGenero = !this.selectedGenre || book.genre === this.genres.find(genre => genre === this.selectedGenre);
-          const cumpleFechaInicio = !this.dateStart || new Date(book.published) >= new Date(parseDate(this.dateStart));
-          const cumpleFechaFin = !this.dateEnd || new Date(book.published) <= new Date(parseDate(this.dateEnd));
+          const cumpleFechaInicio = !this.dateStart || new Date(book.published).setHours(0,0,0,0) >= new Date(parseDate(this.dateStart)).setHours(0,0,0,0);
+          const cumpleFechaFin = !this.dateEnd || new Date(book.published).setHours(0,0,0,0) <= new Date(parseDate(this.dateEnd)).setHours(0,0,0,0);
           return cumpleGenero && cumpleFechaInicio && cumpleFechaFin;
         })
       )

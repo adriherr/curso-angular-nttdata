@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { NewEditBookDialogComponent } from '../../components/new-edit-book-dialog-component/new-edit-book-dialog.component';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'layout-page',
@@ -8,29 +6,6 @@ import { NewEditBookDialogComponent } from '../../components/new-edit-book-dialo
   styles: [
   ]
 })
-export class LayoutPageComponent implements OnInit {
+export class LayoutPageComponent {
 
-  constructor(
-    private addDialog: MatDialog
-  ) { }
-
-  ngOnInit(): void {
-  }
-
-  addBook(): void {
-    console.log('show dialog');
-  //   const dialogRef = this.addDialog.open(NewEditBookDialogComponent);
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log({ result });
-  //     console.log( book.id );
-  //     if (result) this.booksService.removeBook(book.id)
-  //       .subscribe(deletedResult => {
-  //         if (deletedResult) {
-  //           this.showSnackBar(`${book.title} eliminado`);
-  //           this.fetchBooks();
-  //         }
-  //       })
-  //     }
-  //   )
-  }
 }
